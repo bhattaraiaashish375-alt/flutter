@@ -45,21 +45,15 @@ class SpotifyScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Recently Played Horizontal Artists List
+              // Recently Played Horizontal Artists List (Lana Del Rey & Marvin Gaye)
               SizedBox(
-                height: 110,
+                height: 115,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    _buildArtistItem(
-                      'assests/images/wp16214211-raphinha-phone-wallpapers.webp',
-                      'Lana Del Rey',
-                    ),
-                    const SizedBox(width: 16),
-                    _buildArtistItem(
-                      'assests/images/wp16214211-raphinha-phone-wallpapers.webp',
-                      'Marvin Gaye',
-                    ),
+                    _buildArtistItem('Lana Del Rey', Colors.amber[200]!),
+                    const SizedBox(width: 18),
+                    _buildArtistItem('Marvin Gaye', Colors.grey[400]!),
                   ],
                 ),
               ),
@@ -109,11 +103,11 @@ class SpotifyScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // Spotify Wrapped Cards (2 cards side by side matching screenshot)
+              // Spotify Wrapped Cards (2 cards side by side)
               Row(
                 children: [
                   Expanded(
-                    child: _buildTopSongsCard(),
+                    child: _buildTopSongs2021Card(),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -134,21 +128,15 @@ class SpotifyScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // Editor's Picks Cards (2 cards side by side matching screenshot)
+              // Editor's Picks Cards (2 cards side by side)
               Row(
                 children: [
                   Expanded(
-                    child: _buildEditorPickCard1(
-                      imagePath: 'assests/images/wp16214211-raphinha-phone-wallpapers.webp',
-                      subtitle: "Ed Sheeran, Big Sean, Juice WRLD, Post Malone",
-                    ),
+                    child: _buildEditorsPick1(),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: _buildEditorPickCard2(
-                      imagePath: 'assests/images/wp16214211-raphinha-phone-wallpapers.webp',
-                      subtitle: "Mitski, Tame Impala, Glass Animals, Charli XCX",
-                    ),
+                    child: _buildEditorsPick2(),
                   ),
                 ],
               ),
@@ -159,24 +147,18 @@ class SpotifyScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildArtistItem(String imagePath, String name) {
+  Widget _buildArtistItem(String name, Color placeholderColor) {
     return Column(
       children: [
         CircleAvatar(
           radius: 38,
-          backgroundColor: Colors.grey[800],
-          child: ClipOval(
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-              width: 76,
-              height: 76,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[800],
-                  child: const Icon(Icons.person, color: Colors.white54, size: 36),
-                );
-              },
+          backgroundColor: placeholderColor,
+          child: Text(
+            name[0],
+            style: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
             ),
           ),
         ),
@@ -193,13 +175,13 @@ class SpotifyScreen extends StatelessWidget {
     );
   }
 
-  // Your Top Songs 2021 Card (Yellow-green background with 2021 typography)
-  Widget _buildTopSongsCard() {
+  // Your Top Songs 2021 Card
+  Widget _buildTopSongs2021Card() {
     return Container(
-      height: 180,
+      height: 190,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFD3E772),
+        color: const Color(0xFFD4E675),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -209,11 +191,11 @@ class SpotifyScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Icon(Icons.circle, color: Colors.black, size: 14),
+              Icon(Icons.podcasts, color: Color(0xFF2F2942), size: 18),
               Text(
                 "21 ✨",
                 style: TextStyle(
-                  color: Colors.black54,
+                  color: Color(0xFF2F2942),
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
                 ),
@@ -226,19 +208,20 @@ class SpotifyScreen extends StatelessWidget {
               Text(
                 "Your Top Songs",
                 style: TextStyle(
-                  color: Colors.black87,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF2F2942),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 2),
               Text(
                 "2021",
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 34,
+                  color: Color(0xFF2F2942),
+                  fontSize: 38,
                   fontWeight: FontWeight.w900,
                   letterSpacing: -1,
+                  height: 1.0,
                 ),
               ),
             ],
@@ -248,10 +231,10 @@ class SpotifyScreen extends StatelessWidget {
     );
   }
 
-  // Your Artists Revealed Card (Purple background with stylized text)
+  // Your Artists Revealed Card
   Widget _buildArtistsRevealedCard() {
     return Container(
-      height: 180,
+      height: 190,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: const Color(0xFF9E8CD1),
@@ -261,33 +244,26 @@ class SpotifyScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Icon(Icons.circle, color: Colors.white, size: 14),
-              Text(
-                "✨",
-                style: TextStyle(fontSize: 14),
-              ),
-            ],
-          ),
+          const Icon(Icons.podcasts, color: Colors.white, size: 18),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               Text(
                 "Your Artists",
                 style: TextStyle(
-                  color: Colors.indigoAccent,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1C1340),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
+                  height: 1.1,
                 ),
               ),
               Text(
                 "Revealed",
                 style: TextStyle(
-                  color: Colors.indigoAccent,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1C1340),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
+                  height: 1.1,
                 ),
               ),
             ],
@@ -297,93 +273,94 @@ class SpotifyScreen extends StatelessWidget {
     );
   }
 
-  // Editor's Pick Card 1 (Ed Sheeran style with number 1 badge)
-  Widget _buildEditorPickCard1({
-    required String imagePath,
-    required String subtitle,
-  }) {
+  // Editor's Pick 1
+  Widget _buildEditorsPick1() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Stack(
           children: [
             Container(
-              height: 150,
+              height: 160,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                image: DecorationImage(
-                  image: AssetImage(imagePath),
-                  fit: BoxFit.cover,
-                ),
+                color: Colors.grey[900],
+              ),
+              child: const Center(
+                child: Icon(Icons.music_note, size: 48, color: Colors.white54),
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 8,
               left: 8,
-              child: const Icon(Icons.circle, color: Colors.white, size: 14),
+              child: Icon(Icons.podcasts, color: Colors.white, size: 16),
             ),
             Positioned(
               bottom: 4,
-              right: 8,
+              right: 12,
               child: Text(
                 "1",
                 style: TextStyle(
-                  color: Colors.yellowAccent.withValues(alpha: 0.9),
+                  color: const Color(0xFFD4E675),
                   fontSize: 56,
                   fontWeight: FontWeight.w900,
+                  shadows: [
+                    Shadow(
+                      color: Colors.black.withValues(alpha: 0.8),
+                      blurRadius: 4,
+                    ),
+                  ],
                 ),
               ),
             ),
           ],
         ),
         const SizedBox(height: 8),
-        Text(
-          subtitle,
+        const Text(
+          "Ed Sheeran, Big Sean,\nJuice WRLD, Post Malone",
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.grey,
             fontSize: 12,
-            height: 1.2,
+            height: 1.25,
           ),
         ),
       ],
     );
   }
 
-  // Editor's Pick Card 2 (FRONT LEFT style with overlay typography)
-  Widget _buildEditorPickCard2({
-    required String imagePath,
-    required String subtitle,
-  }) {
+  // Editor's Pick 2
+  Widget _buildEditorsPick2() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Stack(
           children: [
             Container(
-              height: 150,
+              height: 160,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF3B6B5B), Color(0xFF1E3A32)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                image: DecorationImage(
-                  image: AssetImage(imagePath),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    Colors.teal.withValues(alpha: 0.4),
-                    BlendMode.darken,
-                  ),
+                color: const Color(0xFF5B7E72),
+              ),
+              child: const Center(
+                child: Icon(Icons.headset, size: 48, color: Colors.white54),
+              ),
+            ),
+            Container(
+              height: 160,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: const Color(0xFFB5E8D3).withValues(alpha: 0.6),
+                  width: 6,
                 ),
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 8,
               left: 8,
-              child: const Icon(Icons.circle, color: Colors.white, size: 14),
+              child: Icon(Icons.podcasts, color: Colors.white, size: 16),
             ),
             Positioned(
               top: 12,
@@ -391,23 +368,23 @@ class SpotifyScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: const [
-                  Text("F R O", style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 16)),
-                  Text("N T", style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 16)),
-                  Text("L E F T", style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text("F R O", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: 1)),
+                  Text("N T", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: 1)),
+                  Text("L E F T", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: 1)),
                 ],
               ),
             ),
           ],
         ),
         const SizedBox(height: 8),
-        Text(
-          subtitle,
+        const Text(
+          "Mitski, Tame Impala,\nGlass Animals, Charli XCX",
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.grey,
             fontSize: 12,
-            height: 1.2,
+            height: 1.25,
           ),
         ),
       ],

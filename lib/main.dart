@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thirdsemesterproject/spotify/spotify.dart';
+import 'package:thirdsemesterproject/facebook_login_screen.dart';
 
 
 void main() {
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           )
 
       ),
-      home: const SpotifyScreen(),
+      home: const FacebookLoginScreen(),
     );
   }
 }
