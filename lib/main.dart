@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thirdsemesterproject/facebook_login_screen.dart';
+import 'package:thirdsemesterproject/widget/social_media_card/social_media_feed_screen.dart';
 
 
 void main() {
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           )
 
       ),
-      home: const FacebookLoginScreen(),
+      home: const SocialMediaFeedScreen(),
     );
   }
 }
